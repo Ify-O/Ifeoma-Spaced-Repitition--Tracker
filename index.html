@@ -1,7 +1,7 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8"/>
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Spaced Repetition Tracker</title>
   </head>
@@ -13,63 +13,48 @@
     </header>
 
     <main>
+      <section>
+        <h2>Select User</h2>
+        <label for="user-select">Choose a user:</label>
+        <select id="user-select" name="user">
+          <option value="">-- Select a user --</option>
+          <option value="user1">User uno</option>
+          <option value="user2">User Dos</option>
+          <option value="user3">User Tres</option>
+          <option value="user4">User Cuatro</option>
+          <option value="user5">User Cinco</option>
+        </select>
+      </section>
 
       <section>
-      <h2>Select User</h2>
-      <label for="user-select">Choose a user:</label>
-      <select id="user-select" name="user">
-        <option value="">-- Select a user --</option>
-        <option value="user1">User uno</option>
-        <option value="user2">User Dos</option>
-        <option value="user3">User Tres</option>
-        <option value="user4">User Cuatro</option>
-        <option value="user5">User Cinco</option>
-      </select>
-    </section>
-
-    <section>
-      <h2>Web-Agenda</h2>
-      <div id="agenda-container">
-        <p>Please select a user to view their revision agenda.</p>
-      </div>
-    </section>
-
-    <section>
-      <h2>Add New Topic</h2>
-
-      <form id="newtopic-form">
-        
-        <div>
-          <label for="newtopic-name">Topic:</label>
-          <input 
-            type="text" 
-            id="newtopic-name" 
-            name="topic" 
-            required 
-          />
+        <h2>Web-Agenda</h2>
+        <div id="agenda-container">
+          <p>Please select a user to view their revision agenda.</p>
         </div>
+      </section>
 
-        <div>
-          <label for="newtopic-date">Start Date:</label>
-          <input 
-            type="date" 
-            id="newtopic-date" 
-            name="date" 
-            required 
-          />
-        </div> 
-        <button type="submit">Add Topic</button>
+      <section>
+        <h2>Add New Topic</h2>
 
-      </form>
-    </section>
+        <form id="newtopic-form">
+          <div>
+            <label for="newtopic-name">Topic:</label>
+            <input type="text" id="newtopic-name" name="topic" required />
+          </div>
 
+          <div>
+            <label for="newtopic-date">Start Date:</label>
+            <input type="date" id="newtopic-date" name="date" required />
+          </div>
+          <button type="submit">Add Topic</button>
+        </form>
+      </section>
     </main>
 
     <footer>
       <p>&copy; 2026 Study Buddy SRT. All rights reserved.</p>
     </footer>
 
-      <script type="module" src="./script.mjs"></script>
-
+    <script type="module" src="./script.mjs"></script>
   </body>
 </html>

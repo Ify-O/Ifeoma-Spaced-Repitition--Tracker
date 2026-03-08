@@ -16,7 +16,11 @@
       <section>
         <h2>Select User</h2>
         <label for="user-select">Choose a user:</label>
-        <select id="user-select" name="user">
+        <select
+          id="user-select"
+          name="user"
+          aria-label="Select user to view agenda"
+        >
           <option value="">-- Select a user --</option>
           <option value="user1">User uno</option>
           <option value="user2">User Dos</option>
@@ -46,7 +50,7 @@
             <label for="newtopic-date">Start Date:</label>
             <input type="date" id="newtopic-date" name="date" required />
           </div>
-          <button type="submit">Add Topic</button>
+          <button type="submit" aria-label="Add new topic">Add Topic</button>
         </form>
       </section>
     </main>

@@ -58,3 +58,21 @@ form.addEventListener("submit", async (event) => {
   dateInput.value = new Date().toISOString().split("T")[0];
 });
 
+// Function to calculate the revision dates based on the given topic and start date
+function calculateRevisionDates(topic, startDate) {
+  const base = new Date(startDate);
+
+  const dates = [
+    addDays(base, 7),
+    addMonths(base, 1),
+    addMonths(base, 3),
+    addMonths(base, 6),
+    addYears(base, 1),
+  ];
+
+  return dates.map((date) => ({
+    topic: topic,
+    date: date.toISOString().split("T")[0],
+  }));
+}
+

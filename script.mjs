@@ -1,6 +1,6 @@
 import { getData, addData } from "./storage.mjs";
 import { getUserIds } from "./common.mjs";
-import { renderAgenda } from "./render.mjs";
+import { renderAgenda, formatDate } from "./render.mjs";
 
 // DOM ELEMENTS
 const userSelect = document.getElementById("user-select");
@@ -13,10 +13,10 @@ const dateInput = document.getElementById("newTopic-date");
 const today = new Date().toISOString().split("T")[0];
 dateInput.value = today;
 
-// Populate the user select dropdown
+// Populate user dropdown
 populateUsers();
 
-// Restore last selected user from localStorage
+// Restore last selected user from localStorage and render agenda
 userSelect.value = localStorage.getItem("selectedUser") || "";
 if (userSelect.value) {
   const data = getData(userSelect.value) || [];
@@ -27,7 +27,7 @@ if (userSelect.value) {
 userSelect.addEventListener("change", () => {
   const userId = userSelect.value;
 
-  // Save the current selection to localStorage
+  // Save selected user
   localStorage.setItem("selectedUser", userId);
 
   if (!userId) {
@@ -40,7 +40,7 @@ userSelect.addEventListener("change", () => {
   renderAgenda(data, agendaContainer);
 });
 
-// Handle form submission for adding new topics
+// Handle form submission to add new topics
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
@@ -64,13 +64,13 @@ form.addEventListener("submit", (event) => {
   const updatedData = getData(userId) || [];
   renderAgenda(updatedData, agendaContainer);
 
-  // Reset form (topic cleared, date reset to today)
+  // Reset form
   topicInput.value = "";
   dateInput.value = today;
   topicInput.focus();
 });
 
-// Populate the user dropdown dynamically
+// Populate user select dropdown
 function populateUsers() {
   const users = getUserIds();
   userSelect.innerHTML = "";
@@ -81,7 +81,7 @@ function populateUsers() {
   defaultOption.textContent = "Select a user";
   userSelect.appendChild(defaultOption);
 
-  // Add user options
+  // User options
   users.forEach((userId, index) => {
     const option = document.createElement("option");
     option.value = userId;
@@ -90,7 +90,7 @@ function populateUsers() {
   });
 }
 
-// Calculate revision dates based on spaced repetition schedule
+// Calculate revision dates for spaced repetition
 function calculateRevisionDates(topic, startDate) {
   const base = new Date(startDate);
 
@@ -108,7 +108,7 @@ function calculateRevisionDates(topic, startDate) {
   }));
 }
 
-// Helper functions to manipulate dates
+// Date helpers
 function addDays(date, days) {
   const newDate = new Date(date);
   newDate.setDate(newDate.getDate() + days);

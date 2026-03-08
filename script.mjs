@@ -129,8 +129,8 @@ function renderAgenda(items) {
   const today = new Date();
 
   const upcomingItems = items
-    .filter((item) => new Date(item.date) >= today) // remove past dates
-    .sort((a, b) => new Date(a.date) - new Date(b.date)); // chronological order
+    .filter((item) => new Date(item.date) >= today)
+    .sort((a, b) => new Date(a.date) - new Date(b.date));
 
   if (upcomingItems.length === 0) {
     agendaContainer.innerHTML = "<p>No upcoming revisions.</p>";
@@ -140,6 +140,7 @@ function renderAgenda(items) {
   const html = upcomingItems
     .map((item) => `<li>${item.topic} — ${formatDate(item.date)}</li>`)
     .join("");
+
   agendaContainer.innerHTML = `<ul>${html}</ul>`;
 }
 

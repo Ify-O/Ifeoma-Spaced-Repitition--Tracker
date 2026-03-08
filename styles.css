@@ -101,3 +101,33 @@ form select {
     border 0.3s,
     box-shadow 0.3s;
 }
+
+form input:focus,
+form select:focus {
+  border-color: #f4a4e7;
+  box-shadow: 0 0 5px #f4a4e7;
+}
+
+button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: #f4a4e7;
+  color: #20081f;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    transform 0.2s;
+}
+button:hover {
+  background-color: #d2d9ef;
+  transform: translateY(-2px);
+}
+
+#agenda-container {
+  background-color: #d2d9ef;
+  padding: 20px;
+  border-radius: 10px;
+  min-height: 80px;
+}

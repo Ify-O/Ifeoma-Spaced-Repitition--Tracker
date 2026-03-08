@@ -31,3 +31,24 @@ header p {
   font-size: 1.15rem;
   font-weight: 400;
 }
+main {
+  flex: 1;
+  max-width: 500px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+section {
+  background-color: #efe9e7;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+  color: #20081f;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}

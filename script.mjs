@@ -1,5 +1,4 @@
 import { getData, addData } from "./storage.mjs";
-import { getUserIds } from "./common.mjs";
 
 //DOM ELEMENTS
 
@@ -98,3 +97,27 @@ function addYears(date, years) {
   return newDate;
 }
 
+// Function to render the revision agenda for a user
+function renderAgenda(items) {
+  if (!items || items.length === 0) {
+    agendaContainer.innerHTML = "<p>No agenda for this user.</p>";
+    return;
+  }
+
+  const today = new Date();
+
+  const upcomingItems = items
+    .filter((item) => new Date(item.date) >= today) // remove past dates
+    .sort((a, b) => new Date(a.date) - new Date(b.date)); // chronological order
+
+  if (upcomingItems.length === 0) {
+    agendaContainer.innerHTML = "<p>No upcoming revisions.</p>";
+    return;
+  }
+
+  const html = upcomingItems
+    .map((item) => `<p>${item.topic}, ${formatDate(item.date)}</p>`)
+    .join("");
+
+  agendaContainer.innerHTML = html;
+}

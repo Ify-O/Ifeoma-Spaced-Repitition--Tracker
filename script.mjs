@@ -56,6 +56,7 @@ form.addEventListener("submit", (event) => {
   // Reset form (keep date defaulted to today)
   topicInput.value = "";
   dateInput.value = today;
+  topicInput.focus();
 });
 
 // Populate the user dropdown dynamically
@@ -120,6 +121,7 @@ function addYears(date, years) {
 }
 
 // Function to render the revision agenda for a user
+
 function renderAgenda(items) {
   if (!items || items.length === 0) {
     agendaContainer.innerHTML = "<p>No agenda for this user.</p>";
@@ -127,7 +129,6 @@ function renderAgenda(items) {
   }
 
   const today = new Date();
-
   const upcomingItems = items
     .filter((item) => new Date(item.date) >= today)
     .sort((a, b) => new Date(a.date) - new Date(b.date));
@@ -137,13 +138,18 @@ function renderAgenda(items) {
     return;
   }
 
-  const html = upcomingItems
-    .map((item) => `<li>${item.topic} — ${formatDate(item.date)}</li>`)
+  const grouped = upcomingItems.reduce((acc, item) => {
+    if (!acc[item.topic]) acc[item.topic] = [];
+    acc[item.topic].push(formatDate(item.date));
+    return acc;
+  }, {});
+
+  const html = Object.entries(grouped)
+    .map(([topic, dates]) => `<li>${topic}: ${dates.join(", ")}</li>`)
     .join("");
 
   agendaContainer.innerHTML = `<ul>${html}</ul>`;
 }
-
 // Helper function to format a date string as "Month Day, Year"
 function formatDate(dateString) {
   const options = { year: "numeric", month: "long", day: "numeric" };

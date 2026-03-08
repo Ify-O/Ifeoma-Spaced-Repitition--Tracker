@@ -14,7 +14,7 @@ const today = new Date().toISOString().split("T")[0];
 dateInput.value = today;
 
 // Populate the user select dropdown
-populateUserSelect();
+populateUsers();
 
 userSelect.addEventListener("change", () => {
   const userId = userSelect.value;

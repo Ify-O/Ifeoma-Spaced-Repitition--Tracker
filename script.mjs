@@ -1,30 +1,32 @@
 import { getData, addData } from "./storage.mjs";
 import { getUserIds } from "./common.mjs";
 
-//DOM ELEMENTS
+// DOM ELEMENTS
 const userSelect = document.getElementById("user-select");
 const agendaContainer = document.getElementById("agenda-container");
-
 const form = document.getElementById("newTopic-form");
 const topicInput = document.getElementById("newTopic-name");
 const dateInput = document.getElementById("newTopic-date");
 
-//Setting the date to today by default
+// Set today's date as default
 const today = new Date().toISOString().split("T")[0];
 dateInput.value = today;
 
 // Populate the user select dropdown
 populateUsers();
 
+// Restore last selected user from localStorage
 userSelect.value = localStorage.getItem("selectedUser") || "";
 if (userSelect.value) {
   const data = getData(userSelect.value) || [];
   renderAgenda(data);
 }
 
+// Listen for user selection changes
 userSelect.addEventListener("change", () => {
   const userId = userSelect.value;
 
+  // Save the current selection to localStorage
   localStorage.setItem("selectedUser", userId);
 
   if (!userId) {
@@ -34,11 +36,10 @@ userSelect.addEventListener("change", () => {
   }
 
   const data = getData(userId) || [];
-
   renderAgenda(data);
 });
 
-//function to handle the form submission for adding a new topic and its revision dates to the user's agenda
+// Handle form submission for adding new topics
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
@@ -53,6 +54,7 @@ form.addEventListener("submit", (event) => {
     alert("Please enter a topic.");
     return;
   }
+
   const startDate = dateInput.value;
   const revisions = calculateRevisionDates(topic, startDate);
 
@@ -61,7 +63,7 @@ form.addEventListener("submit", (event) => {
   const updatedData = getData(userId) || [];
   renderAgenda(updatedData);
 
-  // Reset form (keep date defaulted to today)
+  // Reset form (topic cleared, date reset to today)
   topicInput.value = "";
   dateInput.value = today;
   topicInput.focus();
@@ -70,8 +72,6 @@ form.addEventListener("submit", (event) => {
 // Populate the user dropdown dynamically
 function populateUsers() {
   const users = getUserIds();
-
-  // Clear previous options
   userSelect.innerHTML = "";
 
   // Default option
@@ -79,6 +79,7 @@ function populateUsers() {
   defaultOption.value = "";
   defaultOption.textContent = "Select a user";
   userSelect.appendChild(defaultOption);
+
   // Add user options
   users.forEach((userId, index) => {
     const option = document.createElement("option");
@@ -88,7 +89,7 @@ function populateUsers() {
   });
 }
 
-// Function to calculate the revision dates based on the given topic and start date
+// Calculate revision dates based on spaced repetition schedule
 function calculateRevisionDates(topic, startDate) {
   const base = new Date(startDate);
 
@@ -106,30 +107,26 @@ function calculateRevisionDates(topic, startDate) {
   }));
 }
 
-//helper functions to add days, months, or years to a given date
+// Helper functions to manipulate dates
 function addDays(date, days) {
   const newDate = new Date(date);
   newDate.setDate(newDate.getDate() + days);
-
   return newDate;
 }
 
 function addMonths(date, months) {
   const newDate = new Date(date);
   newDate.setMonth(newDate.getMonth() + months);
-
   return newDate;
 }
 
 function addYears(date, years) {
   const newDate = new Date(date);
   newDate.setFullYear(newDate.getFullYear() + years);
-
   return newDate;
 }
 
-// Function to render the revision agenda for a user
-
+// Render agenda for a user
 function renderAgenda(items) {
   if (!items || items.length === 0) {
     agendaContainer.innerHTML = "<p>No agenda for this user.</p>";
@@ -137,6 +134,8 @@ function renderAgenda(items) {
   }
 
   const today = new Date();
+
+  // Filter out past dates and sort chronologically
   const upcomingItems = items
     .filter((item) => new Date(item.date) >= today)
     .sort((a, b) => new Date(a.date) - new Date(b.date));
@@ -146,6 +145,7 @@ function renderAgenda(items) {
     return;
   }
 
+  // Group dates by topic
   const grouped = upcomingItems.reduce((acc, item) => {
     if (!acc[item.topic]) acc[item.topic] = [];
     acc[item.topic].push(formatDate(item.date));
@@ -158,7 +158,8 @@ function renderAgenda(items) {
 
   agendaContainer.innerHTML = `<ul>${html}</ul>`;
 }
-// Helper function to format a date string as "Month Day, Year"
+
+// Format date as "Month Day, Year"
 function formatDate(dateString) {
   const options = { year: "numeric", month: "long", day: "numeric" };
   return new Date(dateString).toLocaleDateString(undefined, options);

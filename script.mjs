@@ -121,3 +121,9 @@ function renderAgenda(items) {
 
   agendaContainer.innerHTML = html;
 }
+
+// Helper function to format a date string as "Month Day, Year"
+function formatDate(dateString) {
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  return new Date(dateString).toLocaleDateString(undefined, options);
+}

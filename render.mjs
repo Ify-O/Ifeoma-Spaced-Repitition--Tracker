@@ -26,4 +26,27 @@ export function renderAgenda(items, container) {
     return;
   }
 
-  
+  // Group dates by topic
+  const grouped = upcomingItems.reduce((acc, item) => {
+    if (!acc[item.topic]) acc[item.topic] = [];
+    acc[item.topic].push(formatDate(item.date));
+    return acc;
+  }, {});
+
+  const html = Object.entries(grouped)
+    .map(([topic, dates]) => `<li>${topic}: ${dates.join(", ")}</li>`)
+    .join("");
+
+  container.innerHTML = `<ul>${html}</ul>`;
+}
+
+/**
+ * Format a date string as "Month Day, Year"
+ *
+ * @param {string} dateString - Date string (YYYY-MM-DD)
+ * @returns {string} - Formatted date string
+ */
+export function formatDate(dateString) {
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  return new Date(dateString).toLocaleDateString(undefined, options);
+}

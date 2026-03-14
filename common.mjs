@@ -1,3 +1,3 @@
 export function getUserIds() {
-  return ["1", "2", "3", "4", "5"];
+  return ["user1", "user2", "user3", "user4", "user5"];
 }

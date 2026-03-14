@@ -1,6 +1,14 @@
 import { getUserIds } from "./common.mjs";
 import assert from "node:assert";
 import test from "node:test";
+import { calculateRevisionDates } from "../script.mjs";
+
+test("calculateRevisionDates returns 5 revision dates", () => {
+  const result = calculateRevisionDates("JS", "2027-07-19");
+
+  expect(result.length).toBe(5);
+});
+
 
 test("User count is correct", () => {
   assert.equal(getUserIds().length, 5);

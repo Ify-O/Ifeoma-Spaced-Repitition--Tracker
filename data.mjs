@@ -1,14 +1,14 @@
 export const presetTopics = {
-  useruno: [
+  user1: [
     { topic: "HTML Basics", date: "2026-03-01" },
     { topic: "CSS Layouts", date: "2026-03-05" },
   ],
 
-  userDos: [{ topic: "JavaScript Arrays", date: "2026-03-03" }],
+  user2: [{ topic: "JavaScript Arrays", date: "2026-03-03" }],
 
-  userTres: [],
+  user3: [],
 
-  userCuatro: [{ topic: "Web Accessibility", date: "2026-03-02" }],
+  user4: [{ topic: "Web Accessibility", date: "2026-03-02" }],
 
-  userCinco: [],
+  user5: [],
 };

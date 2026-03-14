@@ -97,7 +97,7 @@ function populateUsers() {
 }
 
 // Calculate spaced repetition dates
-function calculateRevisionDates(topic, startDate) {
+export function calculateRevisionDates(topic, startDate) {
   const base = new Date(startDate);
 
   const dates = [

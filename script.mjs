@@ -1,7 +1,6 @@
 import { getData, addData } from "./storage.mjs";
 import { getUserIds } from "./common.mjs";
 import { renderAgenda } from "./render.mjs";
-import { presetTopics } from "./data.mjs";
 
 // DOM ELEMENTS
 const userSelect = document.getElementById("user-select");
@@ -70,19 +69,13 @@ form.addEventListener("submit", (event) => {
   topicInput.focus();
 });
 
-// MERGE PRESET + STORED DATA
-function getUserTopics(userId) {
-  const stored = getData(userId) || [];
-  const preset = presetTopics[userId] || [];
-
-  return [...preset, ...stored];
-}
 
 // DISPLAY AGENDA
 function displayAgenda(userId) {
-  const data = getUserTopics(userId);
+  const data = getData(userId) || [];
   renderAgenda(data, agendaContainer);
 }
+
 
 // Populate user dropdown
 function populateUsers() {

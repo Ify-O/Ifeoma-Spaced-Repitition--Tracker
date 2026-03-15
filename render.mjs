@@ -19,8 +19,10 @@ export function renderAgenda(items, container) {
 
   // Filter upcoming dates and sort
   const upcomingItems = items
-    .filter((item) => new Date(item.date) >= today)
-    .sort((a, b) => new Date(a.date) - new Date(b.date));
+    .filter((item) => new Date(item.date + "T00:00:00") >= today)
+    .sort(
+      (a, b) => new Date(a.date + "T00:00:00") - new Date(b.date + "T00:00:00"),
+    );
 
   if (upcomingItems.length === 0) {
     container.innerHTML = "<p>No upcoming revisions.</p>";

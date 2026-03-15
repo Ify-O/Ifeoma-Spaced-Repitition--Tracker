@@ -9,6 +9,12 @@ test("calculateRevisionDates returns 5 revision dates", () => {
   assert.equal(result.length, 5);
 });
 
+test("calculateRevisionDates creates correct first revision", () => {
+  const result = calculateRevisionDates("JS", "2027-07-19");
+
+  assert.equal(result[0].date, "2027-07-26");
+});
+
 test("User count is correct", () => {
   assert.equal(getUserIds().length, 5);
 });

@@ -45,9 +45,10 @@ header p {
   font-size: 1.15rem;
   font-weight: 400;
 }
+
 header h1 .logo-link {
   text-decoration: none;
-  color: #f4a4e7;
+  color: #ffb3f0;
   transition: color 0.3s ease;
 }
 
@@ -57,7 +58,7 @@ header h1 .logo-link:hover {
 }
 
 header nav a {
-  color: #efe9e7;
+  color: #20081f;
   font-weight: 500;
   transition:
     background-color 0.3s,
@@ -71,10 +72,11 @@ header nav a {
 }
 
 header nav a:hover {
-  color: #f4a4e7;
+  color: #20081f;
   background-color: #d2d9ef;
   transform: translateY(-2px);
 }
+
 main {
   flex: 1;
   max-width: 500px;
@@ -134,7 +136,7 @@ form select {
     border 0.3s,
     box-shadow 0.3s;
 }
-form input[type="text"],
+
 form input[type="date"],
 form select {
   padding: 10px;
@@ -173,10 +175,12 @@ button:hover {
 
 #agenda-container {
   background-color: #d2d9ef;
+  color: #20081f;
   padding: 20px;
   border-radius: 10px;
   min-height: 80px;
 }
+
 #agenda-container ul {
   list-style: disc;
   padding-left: 20px;
@@ -197,21 +201,6 @@ footer {
   font-size: 0.9rem;
   list-style: disc;
   padding-left: 20px;
-}
-
-#agenda-container li {
-  margin-bottom: 8px;
-  font-weight: 500;
-}
-
-footer {
-  text-align: center;
-  margin-top: 40px;
-  padding: 15px 0;
-  background-color: #20081f;
-  color: #efe9e7;
-  border-radius: 10px;
-  font-size: 0.9rem;
 }
 
 @media (max-width: 600px) {

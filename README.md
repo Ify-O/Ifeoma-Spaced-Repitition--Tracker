@@ -177,7 +177,7 @@ Accessibility features include:
 * Screen-reader friendly updates using `aria-live`
 * Logical document structure
 
-The website is designed to achieve **100% Lighthouse accessibility score**, as required by the assignment rubric.
+The website is designed to achieve **100% Lighthouse accessibility score**, as required by the assignment rubric (see attached picture file for score).
 
 # Data Storage
 

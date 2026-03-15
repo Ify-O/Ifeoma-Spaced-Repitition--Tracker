@@ -208,3 +208,11 @@ footer {
     justify-content: center;
   }
 }
+
+a:focus,
+button:focus,
+input:focus,
+select:focus {
+  outline: 3px solid #f4a4e7;
+  outline-offset: 2px;
+}
